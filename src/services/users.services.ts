@@ -10,6 +10,14 @@ class UsersService {
         password
       })
     )
+
+    return result
+  }
+
+  async checkEmailExit(email: string) {
+    const user = await databaseService.users.findOne({ email })
+    console.log(user)
+    return Boolean(user)
   }
 }
 
