@@ -1,12 +1,11 @@
 import { Router } from 'express'
-import { loginValidator } from '~/middlewares/users.middlewares'
+import { loginController, registerController } from '~/controllers/users.controllers'
+import { loginValidator, registerValidator } from '~/middlewares/users.middlewares'
+import { validate } from '~/utils/validation'
 
 const usersRouter = Router()
 
-usersRouter.post('/login', loginValidator, (req, res) => {
-  res.json({
-    message: 'login success'
-  })
-})
+usersRouter.post('/login', loginValidator, loginController)
+usersRouter.post('/register', validate(registerValidator), registerController)
 
 export default usersRouter
